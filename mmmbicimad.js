@@ -73,49 +73,26 @@ Module.register("mmmbicimad", {
 					});
 					// Gmap usuario  (fin)
 					for (i = 1; i < puntos.length; i++) {
-						if (datos[i].dock_bikes>1){
-							marker = new google.maps.Marker({
-								position: new google.maps.LatLng(puntos[i][2], puntos[i][1]),
-								map: map,
-								label: datos[i].dock_bikes,
-								icon: {
-									path: 'M11 2c-3.9 0-7 3.1-7 7 0 5.3 7 13 7 13 0 0 7-7.7 7-13 0-3.9-3.1-7-7-7Zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5Z',
-									scale: 1,
-									anchor: new google.maps.Point(11, 22),
-									fillOpacity: 1,
-									fillColor: 'green',
-									strokeOpacity: 0
-								}
-							});
-						} else if (datos[i].dock_bikes===1){
-							marker = new google.maps.Marker({
-								position: new google.maps.LatLng(puntos[i][2], puntos[i][1]),
-								map: map,
-								label: datos[i].dock_bikes,
-								icon: {
-									path: 'M11 2c-3.9 0-7 3.1-7 7 0 5.3 7 13 7 13 0 0 7-7.7 7-13 0-3.9-3.1-7-7-7Zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5Z',
-									scale: 1,
-									anchor: new google.maps.Point(11, 22),
-									fillOpacity: 1,
-									fillColor: 'orange',
-									strokeOpacity: 0
-								}
-							});
-						} else {
-							marker = new google.maps.Marker({
-								position: new google.maps.LatLng(puntos[i][2], puntos[i][1]),
-								map: map,
-								label: datos[i].dock_bikes,
-								icon: {
-									path: 'M11 2c-3.9 0-7 3.1-7 7 0 5.3 7 13 7 13 0 0 7-7.7 7-13 0-3.9-3.1-7-7-7Zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5Z',
-									scale: 1,
-									anchor: new google.maps.Point(11, 22),
-									fillOpacity: 1,
-									fillColor: 'red',
-									strokeOpacity: 0
-								}
-							});
+						var color = 'red';
+						if (datos[i].dock_bikes>1) {
+							color = 'green';
+						} else if (datos[i].dock_bikes===1) {
+							color = 'orange';
 						}
+
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(puntos[i][2], puntos[i][1]),
+							map: map,
+							label: datos[i].dock_bikes,
+							icon: {
+								path: 'M11 2c-3.9 0-7 3.1-7 7 0 5.3 7 13 7 13 0 0 7-7.7 7-13 0-3.9-3.1-7-7-7Zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5Z',
+								scale: 1,
+								anchor: new google.maps.Point(11, 22),
+								fillOpacity: 1,
+								fillColor: 'red',
+								strokeOpacity: 0
+							}
+						});
 					}
 					// GMaps (Fin)
 				} else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
