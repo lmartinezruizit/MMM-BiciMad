@@ -41,6 +41,11 @@ app.all('*', function(req, res, next) {
 app.get('/', function (req, res) {
    res.json(stations);
 })
+app.get('/bike.png', function (req, res) {
+    var img = fs.readFileSync('./bike.png');
+     res.writeHead(200, {'Content-Type': 'image/png' });
+     res.end(img, 'binary');
+ })
 
 var server = app.listen(8081, function () {
    var host = server.address().address

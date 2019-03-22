@@ -3,13 +3,21 @@ Module.register("mmmbicimad", {
 	defaults: {
 		text: "Hello Bicimad!",
 		key: '',
-		lat: '40.4167',
-		lng: '-3.70325',
-		height: '600px',
-		width: '600px',
+		lat: '40.3925321',
+		lng: '-3.7004556',
+		height: "800px",
+		width: "1400px",
 		zoom: 5,
 		mapTypeId: 'roadmap',
 	},
+
+	start: function () {
+		console.log(this.name + ' started.')
+		var self = this;
+		setInterval(function () {
+				self.updateDom(0);
+		}, 120000);
+},
 
 	getTemplate: function () {
 		return "mmmbicimad.njk"
@@ -45,14 +53,11 @@ Module.register("mmmbicimad", {
 					datos = JSON.parse(xmlHttp.responseText);
 					// Estaciones Info
 					var puntos = [];
-					var infoPuntos = [];
 					datos = datos;
 					// Posición usuario
-					puntos.push(["usuario", -3.70325, 40.4167, 0]);
+					puntos.push(["usuario", -3.7004556, 40.3925321, 0]);
 					// Posición usuario (fIN)                         
 					for (var i = 1; i < datos.length; i++) {
-						//var longitud = parseInt(datos[i].longitude, 10).toFixed(4);
-						//var latitud = parseInt(datos[i].latitude, 10).toFixed(4);
 						puntos.push([datos[i].name, parseFloat(datos[i].longitude, 10), parseFloat(datos[i].latitude, 10), i]);
 						//var distancia = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(puntos[0][2], puntos[0][1]),new google.maps.LatLng(puntos[i][2], puntos[i][1]));
 
@@ -61,8 +66,247 @@ Module.register("mmmbicimad", {
 					// GMaps
 					var map = new google.maps.Map(document.getElementById('map'), {
 						zoom: 15,
-						center: new google.maps.LatLng(40.4167, -3.70325),
-						mapTypeId: google.maps.MapTypeId.ROADMAP
+						center: new google.maps.LatLng(40.3925321, -3.7004556),
+						//mapTypeId: google.maps.MapTypeId.ROADMAP
+						styles: 
+						[
+							{
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#212121"
+									}
+								]
+							},
+							{
+								elementType: "labels",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								elementType: "labels.icon",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#757575"
+									}
+								]
+							},
+							{
+								elementType: "labels.text.stroke",
+								stylers: [
+									{
+										color: "#212121"
+									}
+								]
+							},
+							{
+								featureType: "administrative",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#757575"
+									},
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								featureType: "administrative.country",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#9e9e9e"
+									}
+								]
+							},
+							{
+								featureType: "administrative.land_parcel",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								featureType: "administrative.locality",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#bdbdbd"
+									}
+								]
+							},
+							{
+								featureType: "administrative.neighborhood",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								featureType: "landscape",
+								stylers: [
+									{
+										color: "#000000"
+									}
+								]
+							},
+							{
+								featureType: "poi",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								featureType: "poi",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#757575"
+									}
+								]
+							},
+							{
+								featureType: "poi.park",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#181818"
+									}
+								]
+							},
+							{
+								featureType: "poi.park",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#616161"
+									}
+								]
+							},
+							{
+								featureType: "poi.park",
+								elementType: "labels.text.stroke",
+								stylers: [
+									{
+										color: "#1b1b1b"
+									}
+								]
+							},
+							{
+								featureType: "road",
+								elementType: "geometry.fill",
+								stylers: [
+									{
+										color: "#2c2c2c"
+									}
+								]
+							},
+							{
+								featureType: "road",
+								elementType: "labels.icon",
+								stylers: [
+									{
+										visibility: "on"
+									}
+								]
+							},
+							{
+								featureType: "road",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#8a8a8a"
+									}
+								]
+							},
+							{
+								featureType: "road.arterial",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#373737"
+									}
+								]
+							},
+							{
+								featureType: "road.highway",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#3c3c3c"
+									}
+								]
+							},
+							{
+								featureType: "road.highway.controlled_access",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#4e4e4e"
+									}
+								]
+							},
+							{
+								featureType: "road.local",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#616161"
+									}
+								]
+							},
+							{
+								featureType: "transit",
+								stylers: [
+									{
+										visibility: "off"
+									}
+								]
+							},
+							{
+								featureType: "transit",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#757575"
+									}
+								]
+							},
+							{
+								featureType: "water",
+								elementType: "geometry",
+								stylers: [
+									{
+										color: "#aeaeae"
+									}
+								]
+							},
+							{
+								featureType: "water",
+								elementType: "labels.text.fill",
+								stylers: [
+									{
+										color: "#3d3d3d"
+									}
+								]
+							}
+						]
 					});
 					var infowindow = new google.maps.InfoWindow();
 					var marker, i;
@@ -83,17 +327,33 @@ Module.register("mmmbicimad", {
 						marker = new google.maps.Marker({
 							position: new google.maps.LatLng(puntos[i][2], puntos[i][1]),
 							map: map,
-							label: datos[i].dock_bikes,
-							icon: {
-								path: 'M11 2c-3.9 0-7 3.1-7 7 0 5.3 7 13 7 13 0 0 7-7.7 7-13 0-3.9-3.1-7-7-7Zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5Z',
-								scale: 1,
-								anchor: new google.maps.Point(11, 22),
-								fillOpacity: 1,
-								fillColor: 'red',
-								strokeOpacity: 0
-							}
+							animation: google.maps.Animation.DROP,
+							icon: 'http://localhost:8081/images/bike_' + color + '.png'
 						});
 					}
+
+					var first=true
+					var bikeWrapper = document.createElement("tr");
+            busWrapper.className = 'border_bottom ' + 'medium' + (first ? ' border_top' : '');
+            first = false; // Top border only on the first row
+
+            // Icon
+            if (self.config.showIcon) {
+                var iconWrapper = document.createElement("td");
+                iconWrapper.innerHTML = '<i class="fa fa-bus" aria-hidden="true"></i>';
+                iconWrapper.className = "align-right";
+                busWrapper.appendChild(iconWrapper);
+            }
+
+            // Rute
+            if (self.config.showNumber) {
+                var numberWrapper = document.createElement("td");
+                numberWrapper.innerHTML = bus.number;
+                numberWrapper.className = "atb-number";
+                busWrapper.appendChild(numberWrapper);
+            }
+
+
 					// GMaps (Fin)
 				} else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
 					datos = JSON.parse(xmlHttp.responseText);
