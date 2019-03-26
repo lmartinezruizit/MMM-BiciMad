@@ -49,6 +49,4 @@ Obtain an api at [Google Developer's page](https://developers.google.com/maps/do
 
 ## Coordinates
 
-The easiest way to obtain latitude and longitude coordinates is via [Google Maps](https://maps.google.com). Type an address, location, or center the map where you'd like it centered. The coordinates will appear in the address bar as seen below.
-
-![Alt text](/img/coordinates.png "Google Maps coordinates.")
+The easiest way to obtain latitude and longitude coordinates is via [Google Maps](https://maps.google.com). Type an address, location, or center the map where you'd like it centered. The coordinates will appear in the address bar.
