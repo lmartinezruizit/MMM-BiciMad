@@ -31,11 +31,11 @@
                         var datos = {};
                         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                             datos = JSON.parse(xmlHttp.responseText);
-                            // Estaciones Info
+                            // Stations info
                             var puntos = [];
                             var infoPuntos = [];
                             datos = datos;
-                            // Posición usuario
+                            // GoogleMaps User Position                         
                             puntos.push(["usuario", position.coords.longitude, position.coords.latitude, 0]);
                             infoPuntos.push(['<div class="info_content">' +
                                 '<h3>Aqui estás!</h3>' +
@@ -44,7 +44,6 @@
                                 '<br>Latitud: ' + position.coords.latitude + '</p>' +
                                 '</div>'
                             ]);
-                            // Posición usuario (fIN)                         
                             for (var i = 1; i < datos.length; i++) {
                                 var longitud = parseInt(datos[i].longitude, 10).toFixed(4);
                                 var latitud = parseInt(datos[i].latitude, 10).toFixed(4);
@@ -61,8 +60,7 @@
                                     '</div>'
                                 ]);
                             }
-                            // Estaciones Info (Fin)
-                            // GMaps
+                            // Bicimad stations GoogleMaps
                             var map = new google.maps.Map(document.getElementById('mapa'), {
                                 zoom: 15,
                                 center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
@@ -70,7 +68,7 @@
                             });
                             var infowindow = new google.maps.InfoWindow();
                             var marker, i;
-                            // Gmap usuario  
+                            // User GoogleMaps
                             marker = new google.maps.Marker({
                                 position: {lat:puntos[0][2], lng:puntos[0][1]},
                                 map: map,
@@ -81,7 +79,6 @@
                                     infowindow.open(map, marker);
                                 }
                             })(marker, i));
-                            // Gmap usuario  (fin)
                             for (i = 1; i < puntos.length; i++) {
                                 if (datos[i].dock_bikes>1){
                                     marker = new google.maps.Marker({
@@ -109,7 +106,7 @@
                                     }
                                 })(marker, i));
                             }
-                            // GMaps (Fin)
+				        // Conection API error 
                         } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
                             datos = JSON.parse(xmlHttp.responseText);
                             document.getElementById('mapa').innerHTML('<h1>Error 404 al conectar con la API.</h1>');

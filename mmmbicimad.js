@@ -17,7 +17,7 @@ Module.register("mmmbicimad", {
 		setInterval(function () {
 				self.updateDom(0);
 		}, 120000);
-},
+	},
 
 	getTemplate: function () {
 		return "mmmbicimad.njk"
@@ -51,19 +51,15 @@ Module.register("mmmbicimad", {
 				var datos = {};
 				if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 					datos = JSON.parse(xmlHttp.responseText);
-					// Estaciones Info
+					// Stations Info
 					var puntos = [];
 					datos = datos;
-					// Posición usuario
-					puntos.push(["usuario", -3.7004556, 40.3925321, 0]);
-					// Posición usuario (fIN)                         
+					// GoogleMaps User Position
+					puntos.push(["usuario", -3.7004556, 40.3925321, 0]);                         
 					for (var i = 1; i < datos.length; i++) {
 						puntos.push([datos[i].name, parseFloat(datos[i].longitude, 10), parseFloat(datos[i].latitude, 10), i]);
 						//var distancia = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(puntos[0][2], puntos[0][1]),new google.maps.LatLng(puntos[i][2], puntos[i][1]));
-
 					}
-					// Estaciones Info (Fin)
-					// GMaps
 					var map = new google.maps.Map(document.getElementById('map'), {
 						zoom: 15,
 						center: new google.maps.LatLng(40.3925321, -3.7004556),
@@ -315,7 +311,6 @@ Module.register("mmmbicimad", {
 						position: {lat:puntos[0][2], lng:puntos[0][1]},
 						map: map,
 					});
-					// Gmap usuario  (fin)
 					for (i = 1; i < puntos.length; i++) {
 						var color = 'red';
 						if (datos[i].dock_bikes>1) {
@@ -332,42 +327,18 @@ Module.register("mmmbicimad", {
 						});
 					}
 
-					var first=true
-					var bikeWrapper = document.createElement("tr");
-            busWrapper.className = 'border_bottom ' + 'medium' + (first ? ' border_top' : '');
-            first = false; // Top border only on the first row
-
-            // Icon
-            if (self.config.showIcon) {
-                var iconWrapper = document.createElement("td");
-                iconWrapper.innerHTML = '<i class="fa fa-bus" aria-hidden="true"></i>';
-                iconWrapper.className = "align-right";
-                busWrapper.appendChild(iconWrapper);
-            }
-
-            // Rute
-            if (self.config.showNumber) {
-                var numberWrapper = document.createElement("td");
-                numberWrapper.innerHTML = bus.number;
-                numberWrapper.className = "atb-number";
-                busWrapper.appendChild(numberWrapper);
-            }
-
-
-					// GMaps (Fin)
+				// Conection API error 
 				} else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
 					datos = JSON.parse(xmlHttp.responseText);
 					document.getElementById('map').innerHTML('<h1>Error 404 al conectar con la API.</h1>');
 				}
 			};
-			//xmlHttp.open("GET", cURL, true);
 			xmlHttp.send();
 		}
 		return wrapper;
 	},
 
-	init: function () {
+	/*init: function () {
 		Log.log('hola');
-	}
+	}*/
 });
-
