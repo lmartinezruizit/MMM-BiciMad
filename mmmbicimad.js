@@ -6,7 +6,7 @@ Module.register("mmmbicimad", {
 		lat: '40.3925321',
 		lng: '-3.7004556',
 		height: "800px",
-		width: "1400px",
+		width: "600px",
 		zoom: 5,
 		mapTypeId: 'roadmap',
 	},
@@ -40,8 +40,10 @@ Module.register("mmmbicimad", {
 		script.setAttribute('async', '');
 		document.body.appendChild(script);
 
+		latitude_user = parseFloat(this.config.lat,7)
+		longitude_user = parseFloat(this.config.lng,7)
 
-		var self = this;
+		//var self = this;
 
 		script.onload = function () {
 			var xmlHttp = new XMLHttpRequest();
@@ -55,14 +57,14 @@ Module.register("mmmbicimad", {
 					var puntos = [];
 					datos = datos;
 					// GoogleMaps User Position
-					puntos.push(["usuario", -3.7004556, 40.3925321, 0]);                         
+					puntos.push(["usuario", longitude_user, latitude_user, 0]);                         
 					for (var i = 1; i < datos.length; i++) {
 						puntos.push([datos[i].name, parseFloat(datos[i].longitude, 10), parseFloat(datos[i].latitude, 10), i]);
 						//var distancia = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(puntos[0][2], puntos[0][1]),new google.maps.LatLng(puntos[i][2], puntos[i][1]));
 					}
 					var map = new google.maps.Map(document.getElementById('map'), {
 						zoom: 15,
-						center: new google.maps.LatLng(40.3925321, -3.7004556),
+						center: new google.maps.LatLng(latitude_user, longitude_user),
 						//mapTypeId: google.maps.MapTypeId.ROADMAP
 						styles: 
 						[
